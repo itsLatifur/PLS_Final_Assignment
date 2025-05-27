@@ -211,7 +211,7 @@ Identifiers must begin with a letter. `3a` is an invalid identifier, and the lex
 ---
 
 
-## Files Submitted
+## Files to be Submitted
 
 - Cover Page (printed)
 - Handwritten Explanation
