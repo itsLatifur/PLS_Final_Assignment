@@ -177,6 +177,8 @@ Program parsed successfully.
 ---
 
 ### Invalid Test Case 1 – Missing Semicolon
+
+**Input:**
 ```c
 {
     a + b
@@ -188,6 +190,8 @@ This block contains a valid arithmetic expression, but it is missing the require
 ---
 
 ### Invalid Test Case 2 – Mismatched Brackets
+
+**Input:**
 ```c
 {
     if (a == b) {
@@ -200,6 +204,8 @@ The `if` block is not closed properly. The closing brace `}` is missing. This wi
 ---
 
 ### Invalid Test Case 3 – Invalid Identifier
+
+**Input:**
 ```c
 {
     3a + 5;
