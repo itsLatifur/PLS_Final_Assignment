@@ -37,7 +37,7 @@ To run the program:
 ```bash
 ./parser
 ```
-When you run the file, after typing or pasting the input you must add a new line that contains only `~` and then click `Enter`
+Note: When you run the file, after typing or pasting the input you must add a new line that contains only `~` and then click `Enter`
 
 ---
 
