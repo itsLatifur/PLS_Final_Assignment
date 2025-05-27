@@ -3,7 +3,7 @@ Recursive Descent Parser with LTD Replacement (280)
 Assignment: Programming Languages and Structures (CSC 461)
 Semester: Spring 2025
 Student Name: Md. Latifur Rahman
-Student ID: [Your Full ID Here]
+Student ID: 22103280
 Course Instructor: Md Nazir Ahmed, Lecturer, Dept. of CSE, IUBAT
 */
 
@@ -20,7 +20,7 @@ typedef enum {
     T_LBRACE, T_RBRACE, T_LPAREN, T_RPAREN,
     T_SEMICOLON, T_PLUS, T_MINUS, T_MUL, T_DIV,
     T_EQ, T_NEQ, T_LT, T_GT, T_LE, T_GE,
-    T_NUMBER, T_IDENTIFIER, T_LTD,
+    T_ASSIGN, T_NUMBER, T_IDENTIFIER, T_LTD,
     T_EOF, T_INVALID
 } TokenType;
 
@@ -63,23 +63,23 @@ Token get_next_token() {
         case '-': token.type = T_MINUS; strcpy(token.lexeme, "-"); advance(); return token;
         case '*': token.type = T_MUL; strcpy(token.lexeme, "*"); advance(); return token;
         case '/': token.type = T_DIV; strcpy(token.lexeme, "/"); advance(); return token;
-    }
-
-    // Relational operators
-    if (current_char == '=') {
-        advance();
-        if (current_char == '=') { advance(); token.type = T_EQ; strcpy(token.lexeme, "=="); return token; }
-    } else if (current_char == '!') {
-        advance();
-        if (current_char == '=') { advance(); token.type = T_NEQ; strcpy(token.lexeme, "!="); return token; }
-    } else if (current_char == '<') {
-        advance();
-        if (current_char == '=') { advance(); token.type = T_LE; strcpy(token.lexeme, "<="); return token; }
-        else { token.type = T_LT; strcpy(token.lexeme, "<"); return token; }
-    } else if (current_char == '>') {
-        advance();
-        if (current_char == '=') { advance(); token.type = T_GE; strcpy(token.lexeme, ">="); return token; }
-        else { token.type = T_GT; strcpy(token.lexeme, ">"); return token; }
+        case '=':
+            advance();
+            if (current_char == '=') { advance(); token.type = T_EQ; strcpy(token.lexeme, "=="); }
+            else { token.type = T_ASSIGN; strcpy(token.lexeme, "="); }
+            return token;
+        case '!':
+            advance();
+            if (current_char == '=') { advance(); token.type = T_NEQ; strcpy(token.lexeme, "!="); return token; }
+            break;
+        case '<':
+            advance();
+            if (current_char == '=') { advance(); token.type = T_LE; strcpy(token.lexeme, "<="); return token; }
+            else { token.type = T_LT; strcpy(token.lexeme, "<"); return token; }
+        case '>':
+            advance();
+            if (current_char == '=') { advance(); token.type = T_GE; strcpy(token.lexeme, ">="); return token; }
+            else { token.type = T_GT; strcpy(token.lexeme, ">"); return token; }
     }
 
     // Numbers
@@ -193,6 +193,17 @@ void statement() {
         condition();
         match(T_RPAREN);
         block();
+    } else if (current_token.type == T_IDENTIFIER) {
+        Token id = current_token;
+        match(T_IDENTIFIER);
+        if (current_token.type == T_ASSIGN) {
+            match(T_ASSIGN);
+            expression();
+            match(T_SEMICOLON);
+        } else {
+            printf("Syntax Error: Expected '=' after identifier '%s'\n", id.lexeme);
+            exit(1);
+        }
     } else {
         expression();
         match(T_SEMICOLON);
