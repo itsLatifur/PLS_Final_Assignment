@@ -37,13 +37,12 @@ To run the program:
 ```bash
 ./parser
 ```
-Then paste your multi-line code. End input with a tilde `~` on a new line.
+When you run the file, after typing or pasting the input you must add a new line that contains only `~` and then click `Enter`
 
 ---
 
 ## Example Valid Input
 
-Note: If you run the file in CodeBlocks then after typing or pasting the input you must add a new line with only ~ and then click enter.
 ```c
 {
     if (a == LTD) {
