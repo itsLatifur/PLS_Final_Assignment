@@ -42,6 +42,8 @@ Then paste your multi-line code. End input with a tilde `~` on a new line.
 ---
 
 ## Example Valid Input
+
+Note: If you run the file in CodeBlocks then after typing or pasting the input you must add a new line with only ~ and then click enter.
 ```c
 {
     if (a == LTD) {
